@@ -1,0 +1,8 @@
+- name: Copy custom policies
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ data_stream_home }}"
+    mode: "0400"
+  loop:
+    - "{{ playbook_dir }}/files/ds/tailored/{{ tailor_rule_set }}"
+    - "{{ playbook_dir }}/files/ds/ssg/{{ base_rule_set }}"

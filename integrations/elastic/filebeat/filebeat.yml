@@ -1,0 +1,17 @@
+filebeat.inputs:
+  - type: filestream
+    id: xml-oscap
+    enabled: true
+    encoding: utf-8
+    message_max_bytes: 52428800
+    paths:
+      -  # Path to pre results
+      -  # Path to post results
+    parsers:
+      - multiline:
+          type: pattern
+          pattern: '^<\?xml*'
+          negate: true
+          match: after
+          max_lines: 30000000
+          timeout: 20s

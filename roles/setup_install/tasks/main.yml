@@ -1,0 +1,7 @@
+- name: Install necesary packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - openscap-scanner
+    - scap-security-guide
