@@ -1,0 +1,17 @@
+---
+- name: Autogenerate Ansible fixes
+  ansible.builtin.shell: |
+    mkdir -p /tmp/fixes/
+    oscap xccdf generate fix --profile {{ tailored_profile }} \
+    --tailoring-file {{ path_tailored_ruleset }} \
+    --fix-type ansible {{ path_tailored_ruleset }} > {{ path_ansible_fixes_host }} 2> >(tee /tmp/generate_ansible-Error-{{ inventory_hostname }}.log >&2)
+    rc=$?
+    if [ $rc -eq 0 ]; then
+      rm -f /tmp/oscap-log/generate_ansible-Error-{{ inventory_hostname }}.log
+    fi
+    exit $rc
+  register: result
+  changed_when: result.rc == 0
+  failed_when: result.rc >= 1
+  tags: oscap_ansible_fix
+  when: auto_fix or autogenerate_ansible

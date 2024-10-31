@@ -1,0 +1,13 @@
+name: Molecule
+on:
+  pull_request:
+    branches: ["main", "stable", "release/v*", "docker_integration"]
+  workflow_dispatch:
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: "${{ github.repository }}/main.yml"
+      - uses: gofrolist/molecule-action@v2

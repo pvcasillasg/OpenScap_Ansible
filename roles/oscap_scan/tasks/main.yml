@@ -1,0 +1,20 @@
+- name: Scaning vulnerabilities
+  ansible.builtin.shell: |
+    mkdir -p /tmp/oscap-log
+    mkdir -p {{ path_results }}
+    output=$(mktemp /tmp/oscap-log/output-{{ inventory_hostname }}.log.XXXXXX)
+    oscap xccdf eval --xccdf-id {{ base_rule_set_id }} \
+    --tailoring-file {{ path_tailored_ruleset }} --profile {{ tailored_profile }} \
+    --oval-results --results {{ report_xml_pre }} --report {{ report_html_pre }} \
+    {{ path_tailored_ruleset }} > $output 2>&1
+    rc=$?
+    if [ $rc -eq 1 ] || [ $rc -eq 3 ] || [ $rc -ge 4 ]; then
+      mv $output /tmp/oscap-log/oscap-scan-error-{{ inventory_hostname }}.log
+    else
+      rm $output
+    fi
+    exit $rc
+  register: result
+  changed_when: result.rc == 0 or result.rc == 2
+  failed_when: result.rc == 1 or result.rc >= 4
+  tags: oscap_scan

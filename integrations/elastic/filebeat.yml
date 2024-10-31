@@ -1,0 +1,38 @@
+filebeat.inputs:
+  - type: filestream
+    id: xml-oscap_pre
+    enabled: true
+    encoding: utf-8
+    max_bytes: 52428800
+    message_max_bytes: 52428800
+    paths:
+      - /home/ansible/ansible_openscap/reports/pre_reports/*.xml
+    parsers:
+      - multiline:
+          type: pattern
+          pattern: '^<\?xml*'
+          negate: true
+          match: after
+          max_lines: 30000000
+          timeout: 20s
+    fields:
+      index: oscap_pre
+  #
+  - type: filestream
+    id: xml-oscap_post
+    enabled: true
+    encoding: utf-8
+    message_max_bytes: 52428800
+    max_bytes: 52428800
+    paths:
+      - /home/ansible/ansible_openscap/reports/post_reports/*.xml
+    parsers:
+      - multiline:
+          type: pattern
+          pattern: '^<\?xml*'
+          negate: true
+          match: after
+          max_lines: 30000000
+          timeout: 20s
+    fields:
+      index: oscap_post

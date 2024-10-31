@@ -1,0 +1,13 @@
+# Fetch loop control
+fetch_loop_files:
+  - { src: "{{ report_xml_pre }}", dest: "{{ pre_reports_xml }}" }
+  - { src: "{{ report_html_pre }}", dest: "{{ pre_reports_html }}" }
+fetch_loop_files_full:
+  - { src: "{{ report_xml_pre }}", dest: "{{ pre_reports_xml }}" }
+  - { src: "{{ report_html_pre }}", dest: "{{ pre_reports_html }}" }
+  - { src: "{{ report_xml_post }}", dest: "{{ post_reports_xml }}" }
+  - { src: "{{ report_html_post }}", dest: "{{ post_reports_html }}" }
+fetch_loop_files_ansible:
+  - { src: "{{ report_xml_pre }}", dest: "{{ pre_reports_xml }}" }
+  - { src: "{{ report_html_pre }}", dest: "{{ pre_reports_html }}" }
+  - { src: "{{ path_ansible_fixes_host }}", dest: "{{ path_ansible_fixes }}" }
