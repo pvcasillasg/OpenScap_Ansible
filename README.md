@@ -6,7 +6,7 @@
 </div>
 <div align="center">
 
-![GitHub License](https://img.shields.io/github/license/pvcasillasg/OpenScap_Ansiblae)
+![GitHub License](https://img.shields.io/github/license/pvcasillasg/OpenScap_Ansible)
 ![GitHub Repo stars](https://img.shields.io/github/stars/pvcasillasg/OpenScap_Ansible)
 ![GitHub forks](https://img.shields.io/github/forks/pvcasillasg/OpenScap_Ansible)
 ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/pvcasillasg/OpenScap_Ansible)
